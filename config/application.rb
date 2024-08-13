@@ -14,8 +14,11 @@ module RailsLogopaediebreula
     
     config.autoload_lib(ignore: %w(assets tasks))
 
-    config.autoload_paths += %W(#{config.root}/app/models/employee #{config.root}/app/models/client #{config.root}/app/models/shared)
-  
+    config.autoload_paths += %W(
+      #{config.root}/app/models/shared
+      #{config.root}/app/models/employee
+      #{config.root}/app/models/client
+    )
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     config.time_zone = 'Berlin'
 
