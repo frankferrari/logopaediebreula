@@ -23,5 +23,16 @@ module RailsLogopaediebreula
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+  
+    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
+    config.time_zone = 'Berlin'
+
+    # Set default locale to German
+    config.i18n.default_locale = :de
+    config.i18n.available_locales = [:de]
+
+    # Use default German locale settings for date, time, and number formatting
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
   end
 end
+ 
