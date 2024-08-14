@@ -1,4 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -58,6 +59,9 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # Explicitly require namespaced models
+  Rails.application.eager_load!
+
   # ----------------------------------------
   # 3. FactoryBot Configuration
   # ----------------------------------------
@@ -93,5 +97,3 @@ RSpec.configure do |config|
 
   # Add any custom helper methods for your tests here
 end
-
-Dir[Rails.root.join('spec/factories/**/*.rb')].each { |f| require f }

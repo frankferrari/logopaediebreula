@@ -3,6 +3,7 @@ module Client
     belongs_to :user
     has_many :patients, class_name: 'Client::Patient', dependent: :destroy
 
+    validates :user, presence: true
     validates :address, presence: true
     validates :phone_number, presence: true, format: { with: /\A\+?[\d\s()-]+\z/, message: 'invalid format' }
 
@@ -10,10 +11,5 @@ module Client
 
     private
 
-    def user_not_associated_with_employee
-      return unless user.employee.present?
-
-      errors.add(:user, 'is already associated with an employee')
-    end
   end
 end

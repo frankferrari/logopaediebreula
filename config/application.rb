@@ -19,6 +19,12 @@ module RailsLogopaediebreula
       #{config.root}/app/models/employee
       #{config.root}/app/models/client
     )
+
+    # Explicitly require models
+    config.to_prepare do
+      Dir.glob(Rails.root.join('app', 'models', '**', '*.rb')).each { |file| require_dependency file }
+    end
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     config.time_zone = 'Berlin'
 

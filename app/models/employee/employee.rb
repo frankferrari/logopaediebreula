@@ -17,16 +17,11 @@ module Employee
 
     private
 
-    def user_not_associated_with_client
-      return unless user.client.present?
-
-      errors.add(:user, 'is already associated with a client')
-    end
-
     def date_of_birth_not_in_future
       return unless date_of_birth.present? && date_of_birth > Date.today
 
       errors.add(:date_of_birth, "can't be in the future")
     end
+
   end
 end

@@ -1,0 +1,6 @@
+app/assets/builds
+log/
+tmp/
+storage/
+config/locales
+config/credentials/

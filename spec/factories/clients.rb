@@ -10,5 +10,3 @@ FactoryBot.define do
     phone_number { Faker::PhoneNumber.phone_number }
   end
 end
-
-puts "FactoryBot.factories after defining: #{FactoryBot.factories.instance_variable_get('@items').keys}"
