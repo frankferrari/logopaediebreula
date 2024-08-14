@@ -13,7 +13,15 @@ module Employee
     validates :date_of_birth, presence: true
     validate :date_of_birth_not_in_future
 
+    validate :user_not_associated_with_client
+
     private
+
+    def user_not_associated_with_client
+      return unless user.client.present?
+
+      errors.add(:user, 'is already associated with a client')
+    end
 
     def date_of_birth_not_in_future
       return unless date_of_birth.present? && date_of_birth > Date.today

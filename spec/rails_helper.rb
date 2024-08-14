@@ -23,6 +23,14 @@ end
 
 # Automatically require all files in the support directory
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
+# Explicitly require factory files
+loaded_factories = Set.new
+Dir[Rails.root.join('spec/factories/**/*.rb')].each do |f|
+  unless loaded_factories.include?(File.basename(f))
+    require f
+    loaded_factories.add(File.basename(f))
+  end
+end
 
 # ----------------------------------------
 # 2. RSpec Configuration
@@ -30,7 +38,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{Rails.root.join('spec/fixtures')}"
+  config.fixture_paths = "#{Rails.root.join('spec/fixtures')}"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -58,7 +66,9 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   # Automatically find definitions in spec/factories
-  FactoryBot.find_definitions
+  config.before(:suite) do
+    FactoryBot.find_definitions
+  end
 
   # ----------------------------------------
   # 4. Database Cleaner Configuration
@@ -83,3 +93,5 @@ RSpec.configure do |config|
 
   # Add any custom helper methods for your tests here
 end
+
+Dir[Rails.root.join('spec/factories/**/*.rb')].each { |f| require f }

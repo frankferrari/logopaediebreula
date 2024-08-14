@@ -7,7 +7,7 @@ module Client
     has_many :locations, through: :patient_locations, class_name: 'Shared::Location'
 
     enum gender: { male: 0, female: 1, other: 2 }
-    enum health_insurance: { public: 0, private: 1 }
+    enum health_insurance: { publicly: 0, privately: 1 }
 
     validates :patient_first_name, presence: true
     validates :patient_last_name, presence: true

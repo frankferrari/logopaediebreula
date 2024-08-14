@@ -1,5 +1,8 @@
 FactoryBot.define do
-  factory :employee do
+  # Guard clause to prevent redefinition
+  return if FactoryBot.factories.registered?(:employee)
+
+  factory :employee, class: 'Employee::Employee' do
     user
     employee_first_name { Faker::Name.first_name }
     employee_last_name { Faker::Name.last_name }

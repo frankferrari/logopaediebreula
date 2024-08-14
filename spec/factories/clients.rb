@@ -1,5 +1,8 @@
 FactoryBot.define do
-  factory :client do
+  # Guard clause to prevent redefinition
+  return if FactoryBot.factories.registered?(:client)
+
+  factory :client, class: 'Client::Client' do
     user
     client_first_name { Faker::Name.first_name }
     client_last_name { Faker::Name.last_name }
@@ -7,3 +10,5 @@ FactoryBot.define do
     phone_number { Faker::PhoneNumber.phone_number }
   end
 end
+
+puts "FactoryBot.factories after defining: #{FactoryBot.factories.instance_variable_get('@items').keys}"
