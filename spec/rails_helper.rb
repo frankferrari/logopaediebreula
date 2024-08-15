@@ -11,6 +11,10 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'factory_bot_rails'
 
+require 'faker'
+Faker::Config.locale = 'de' 
+
+
 # ----------------------------------------
 # 1. Test File Management
 # ----------------------------------------
@@ -23,15 +27,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 # Automatically require all files in the support directory
-Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
-# Explicitly require factory files
-loaded_factories = Set.new
-Dir[Rails.root.join('spec/factories/**/*.rb')].each do |f|
-  unless loaded_factories.include?(File.basename(f))
-    require f
-    loaded_factories.add(File.basename(f))
-  end
-end
+# Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 # ----------------------------------------
 # 2. RSpec Configuration
@@ -69,9 +65,10 @@ RSpec.configure do |config|
   # Include FactoryBot methods
   config.include FactoryBot::Syntax::Methods
 
-  # Automatically find definitions in spec/factories
+  # Load factories once at the beginning of the suite
   config.before(:suite) do
-    FactoryBot.find_definitions
+    FactoryBot.definition_file_paths = [File.expand_path('../factories', __FILE__)]
+    FactoryBot.reload
   end
 
   # ----------------------------------------

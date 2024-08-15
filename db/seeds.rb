@@ -9,13 +9,13 @@
 #   end
 require_relative '../app/models/shared/location'
 require_relative '../app/models/shared/language'
-require_relative '../app/models/shared/aof'
+require_relative '../app/models/shared/focusarea'
 
 # Clear existing data
 puts "Clearing existing data..."
 Shared::Location.destroy_all
 Shared::Language.destroy_all
-Shared::Aof.destroy_all
+Shared::Focusarea.destroy_all
 
 # Seed Locations
 puts "Seeding Locations..."
@@ -33,9 +33,9 @@ languages.each do |name|
 end
 puts "Created #{Shared::Language.count} languages"
 
-# Seed Aof (Areas of Focus)
-puts "Seeding Aof..."
-aofs = [
+# Seed Focus Area
+puts "Seeding Focus Area..."
+focusareas = [
   "Aussprachestörung",
   "Autismus",
   "Essverhaltensstörung",
@@ -51,9 +51,9 @@ aofs = [
   "Unterstützte Kommunikation",
   "neurologische Störung"
 ]
-aofs.each do |name|
-  Shared::Aof.create!(name: name)
+focusareas.each do |name|
+  Shared::Focusarea.create!(name: name)
 end
-puts "Created #{Shared::Aof.count} areas of focus"
+puts "Created #{Shared::Focusarea.count} areas of focus"
 
 puts "Seeding completed successfully!"

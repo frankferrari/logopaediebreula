@@ -1,25 +1,19 @@
 FactoryBot.define do
-  # Guard clause to prevent redefinition
-  return if FactoryBot.factories.registered?(:user)
-
   factory :user do
     email { Faker::Internet.email }
-    password { 'Password123!' }
-    password_confirmation { 'Password123!' }
+    password { 'password123' }
+    password_confirmation { 'password123' }
 
-    trait :client do
+    trait :with_employee do
       after(:create) do |user|
-        create(:client, user:)
+        create(:employee, user: user)
       end
     end
 
-    trait :employee do
+    trait :with_client do
       after(:create) do |user|
-        create(:employee, user:)
+        create(:client, user: user)
       end
     end
-
-    factory :client_user, traits: [:client]
-    factory :employee_user, traits: [:employee]
   end
 end

@@ -1,7 +1,4 @@
 FactoryBot.define do
-  # Guard clause to prevent redefinition
-  return if FactoryBot.factories.registered?(:employee)
-
   factory :employee, class: 'Employee::Employee' do
     user
     employee_first_name { Faker::Name.first_name }
@@ -13,6 +10,36 @@ FactoryBot.define do
 
     trait :admin do
       is_admin { true }
+    end
+
+    trait :with_focusareas do
+      transient do
+        focusareas_count { 2 }
+      end
+
+      after(:create) do |employee, evaluator|
+        create_list(:employees_focusareas, evaluator.focusareas_count, employee: employee)
+      end
+    end
+
+    trait :with_languages do
+      transient do
+        languages_count { 2 }
+      end
+
+      after(:create) do |employee, evaluator|
+        create_list(:employees_languages, evaluator.languages_count, employee: employee)
+      end
+    end
+
+    trait :with_locations do
+      transient do
+        locations_count { 2 }
+      end
+
+      after(:create) do |employee, evaluator|
+        create_list(:employees_locations, evaluator.locations_count, employee: employee)
+      end
     end
   end
 end

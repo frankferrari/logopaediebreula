@@ -1,15 +1,11 @@
 module Client
-  class Client < ApplicationRecord
-    belongs_to :user
-    has_many :patients, class_name: 'Client::Patient', dependent: :destroy
+end
 
-    validates :user, presence: true
-    validates :address, presence: true
-    validates :phone_number, presence: true, format: { with: /\A\+?[\d\s()-]+\z/, message: 'invalid format' }
+class Client::Client < ApplicationRecord
+  belongs_to :user
+  has_many :patients, class_name: 'Client::Patient', dependent: :destroy
 
-    validate :user_not_associated_with_employee
-
-    private
-
-  end
+  validates :user, presence: true
+  validates :address, presence: true
+  validates :phone_number, presence: true, format: { with: /\A\+?[\d\s()-]+\z/, message: 'invalid format' }
 end

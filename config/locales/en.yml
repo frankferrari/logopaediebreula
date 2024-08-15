@@ -1,7 +1,7 @@
 en:
   faker:
     name:
-      first_name: "First Name"
-      last_name: "Last Name"
+      first_name: [Alexander, Andreas, Angelika, Anna, Bernd, Birgit, Christian, Claudia, Dieter, Elisabeth, Frank, Gabriele, Hans, Helga, Ingrid, Jörg, Karin, Klaus, Manfred, Maria, Michael, Monika, Peter, Petra, Rainer, Sabine, Stefan, Susanne, Thomas, Ursula, Wolfgang]
+      last_name: [Müller, Schmidt, Schneider, Fischer, Weber, Meyer, Wagner, Becker, Schulz, Hoffmann, Schäfer, Koch, Bauer, Richter, Klein, Wolf, Schröder, Neumann, Schwarz, Zimmermann, Braun, Krüger, Hofmann, Hartmann, Lange, Schmitt, Werner, Schmitz, Krause, Meier, Lehmann, Schmid, Schulze, Maier, Köhler]
     internet:
-      email: "email@example.com"
+      email: [gmail.com, yahoo.com, hotmail.com, example.com, email.de]

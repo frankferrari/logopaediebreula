@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # Test for valid factory
-  describe 'factory' do
+  
+  describe 'valid factory check' do
     it 'has a valid factory' do
       expect(build(:user)).to be_valid
     end
@@ -24,8 +24,9 @@ RSpec.describe User, type: :model do
 
   # Test for user type logic
   describe 'user type' do
+
     context 'when user is a client' do
-      let(:user) { create(:user, :client) }
+      let(:user) { create(:user, :with_client) }
 
       it 'is associated with a client' do
         expect(user.client).to be_a(Client::Client)
@@ -45,7 +46,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when user is an employee' do
-      let(:user) { create(:user, :employee) }
+      let(:user) { create(:user, :with_employee) }
 
       it 'is associated with an employee' do
         expect(user.employee).to be_a(Employee::Employee)
@@ -68,7 +69,7 @@ RSpec.describe User, type: :model do
   # Test for deletion behavior
   describe 'deletion behavior' do
     context 'when user is a client' do
-      let!(:user) { create(:user, :client) }
+      let!(:user) { create(:user, :with_client) }
       let!(:patient) { create(:patient, client: user.client) }
 
       it 'deletes associated client when user is deleted' do
@@ -81,7 +82,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when user is an employee' do
-      let!(:user) { create(:user, :employee) }
+      let!(:user) { create(:user, :with_employee) }
 
       it 'deletes associated employee when user is deleted' do
         expect { user.destroy }.to change(Employee::Employee, :count).by(-1)
